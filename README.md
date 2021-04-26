@@ -6,10 +6,10 @@ This nokxpkgs channel contains all *(overlayed)* nokx softwares pinned with an o
 
 ## How to use a nokx software
 
-Here we explain how to use a nokx software pinned according to a specific release ([`f1adac8`](https://github.com/nokx5/nokxpkgs/commit/f1adac8a37baf923ed4e99f3b6e11fea01df904a)). We illustrate this with the **golden_cpp** software.
+Here we explain how to use a nokx software pinned according to a specific release ([`0c42647`](https://github.com/nokx5/nokxpkgs/commit/0c426477b0366270c6dea904f427ed8b15e39a4f)). We illustrate this with the **golden_cpp** software.
 
 ```bash
-> nix-shell -I nixpkgs=https://github.com/nokx5/nokxpkgs/archive/f1adac8a37baf923ed4e99f3b6e11fea01df904a.tar.gz --pure -p golden_cpp
+> nix-shell -I nixpkgs=https://github.com/nokx5/nokxpkgs/archive/0c426477b0366270c6dea904f427ed8b15e39a4f.tar.gz --pure -p golden_cpp
 
 $ cli_golden_cpp
 Welcome to nokx cpp golden project!
