@@ -20,6 +20,7 @@ in {
 
   golden_cpp = callPackage ./golden_cpp { };
   golden_python_cli = super.python3Packages.golden_python_cli;
+  golden_rust = callPackage ./golden_rust { };
 
   python37 = super.python37.override (old: {
     packageOverrides =
