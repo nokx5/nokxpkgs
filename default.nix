@@ -10,5 +10,5 @@ let
     sha256 = "1h0npga8nlbmv2fnirmv8v5xs8xd3k7hn803lxjn09hyqdcxx23n";
   };
 
-in import nokxpkgs { overlays = (map (x: import x) [ ./nokxroot ]); }
+in import nokxpkgs { overlays = (map (x: import x) [ ./nixpkgs-nokx ]); }
 

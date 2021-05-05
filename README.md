@@ -2,7 +2,7 @@
 
 Welcome to the official **nokxpkgs** channel of [nokx](https://github.com/nokx5/)!
 
-This nokxpkgs channel contains all *(overlayed)* nokx softwares pinned with an official **_stable_ nixpkgs** to help creating fully reproducible software expressions.
+This nokxpkgs channel contains all [*(overlayed)*](https://github.com/nokx5/nokxpkgs/blob/main/nixpkgs-nokx/default.nix) nokx softwares pinned with an official [**_stable_ nixpkgs**](https://github.com/nokx5/nokxpkgs/blob/main/default.nix#L5-L11) to help creating fully reproducible software expressions.
 
 ## How to use a nokx software
 
@@ -61,6 +61,8 @@ channel. The `default.nix` instead appears when the project joined the
     nix-shell -I nixpkgs=https://github.com/nokx5/nokxpkgs/archive/main.tar.gz default-shell.nix
     ``` 
  
+3. Using the overlay `nixpkgs-nokx`... (wip, for advanced users).
+
 ### Add nokxpkgs to your nix channel
 
 To avoid repeating the urls, use nix channels.
@@ -101,9 +103,17 @@ Don't forget to update and clean sometimes your nix store. :wink:
 **Scripts & Automation**
 ***
 
-### Available nokx documentation
-
 ## Use a code formatter
 ```bash
 nixfmt $(find -name "*.nix")
 ```
+
+
+# Available nix documentation
+
+- [Nix pills](https://nixos.org/guides/nix-pills/index.html)
+- [Nixpkgs Manual](https://nixos.org/manual/nixpkgs/stable/), usefull for each programming language
+- [Hook and phases](https://nixos.org/manual/nixpkgs/stable/#sec-stdenv-phases), usefull for debug the packaging
+- Overlays, [excellent youtube](https://www.youtube.com/watch?v=W85mF1zWA2o)
+- Flakes, wip
+

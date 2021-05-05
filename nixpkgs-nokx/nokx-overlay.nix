@@ -1,13 +1,7 @@
-self:
+self: super:
 
 let
-  inherit (self) callPackage stdenv;
-
-  inherit (stdenv) lib;
-  pythonPackageOverrides = (import ./pythonroot self);
-
-  all_pkgs = (with self; [ golden_cpp golden_python_cli ])
-    ++ (with self.python3Packages; [ golden_binding golden_python ]);
+  inherit (super) callPackage lib;
 
   commonMeta = {
     description = "another nokx software";
@@ -16,9 +10,13 @@ let
     license = { free = true; };
   };
 
-in super: {
+  pythonPackageOverrides = import ./python-modules;
 
-  inherit all_pkgs commonMeta;
+in {
+  inherit commonMeta;
+
+  all-nokx =
+    (with self; [ golden_cpp golden_python_cli ] ++ python3Packages.all-nokx);
 
   golden_cpp = callPackage ./golden_cpp { stdenv = self.clangStdenv; };
   golden_python_cli = super.python3Packages.golden_python_cli;
