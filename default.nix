@@ -6,8 +6,8 @@ let
   nokxpkgs = builtins.fetchTarball {
     # example source: https://github.com/nixos/nixpkgs/archive/c00959877fb06b09468562518b408acda886c79e.tar.gz";
     url =
-      "https://github.com/NixOS/nixpkgs/archive/c7e905b6a971dad2c26a31960053176c770a812a.tar.gz";
-    sha256 = "1h0npga8nlbmv2fnirmv8v5xs8xd3k7hn803lxjn09hyqdcxx23n";
+      "https://github.com/NixOS/nixpkgs/archive/eb7e1ef185f6c990cda5f71fdc4fb02e76ab06d5.tar.gz";
+    sha256 = "1ibz204c41g7baqga2iaj11yz9l75cfdylkiqjnk5igm81ivivxg";
   };
 
 in import nokxpkgs {
