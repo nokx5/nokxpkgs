@@ -18,6 +18,13 @@ in {
 
   inherit (callPackage ./golden_python { }) golden_python golden_python_cli;
 
+  # disable test for fastapi
+  starlette = python-super.starlette.overridePythonAttrs (oldAttrs: rec {
+    checkPhase = ''
+      pytest --ignore=tests/test_graphql.py --ignore=tests/middleware/test_errors.py
+    '';
+  });
+
   inherit (callPackage ./speedo { }) speedo speedo_client;
 
 }

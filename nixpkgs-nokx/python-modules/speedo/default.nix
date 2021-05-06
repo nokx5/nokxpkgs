@@ -1,6 +1,6 @@
 { commonMeta, lib, fetchgit, buildPythonPackage, buildPythonApplication, fastapi
 , prometheus_client, pycurl, pydantic, pytestCheckHook, sqlalchemy-utils
-, starlette, uvicorn, alembic, mock }:
+, uvicorn, alembic, mock }:
 
 let
   version = "1.0.0";
@@ -8,7 +8,7 @@ let
   src = fetchgit {
     url = "https://github.com/nokx5/speedo.git";
     rev = "75c59ddadd51116a1dd3c3636f8c7247eebeb370";
-    sha256 = "sha256:14mzpv023swgrl6q156y7ff5v0na0s6zvx6nnzdkra3n91b302iz";
+    sha256 = "sha256:0q49pyizsgjgd1kjmdbn545n2qj23i3y8kqs1893f8fxpa2hfx98";
   };
 
   checkInputs = [ pytestCheckHook mock fastapi prometheus_client ];
@@ -32,7 +32,7 @@ in {
     SPEEDO_TARGET = "server";
 
     propagatedBuildInputs =
-      [ fastapi prometheus_client sqlalchemy-utils starlette uvicorn alembic ];
+      [ fastapi prometheus_client sqlalchemy-utils uvicorn alembic ];
 
     pytestFlagsArray = [ "tests/server" ];
 
