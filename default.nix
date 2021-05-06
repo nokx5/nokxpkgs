@@ -10,7 +10,5 @@ let
     sha256 = "1ibz204c41g7baqga2iaj11yz9l75cfdylkiqjnk5igm81ivivxg";
   };
 
-in import nokxpkgs {
-  overlays = (map (x: import x) [ ./nixpkgs-nokx ./nixpkgs-cherix ]);
-}
+in import nokxpkgs { overlays = (map (x: import x) [ ./nixpkgs-nokx ]); }
 
