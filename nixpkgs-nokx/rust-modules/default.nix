@@ -8,6 +8,6 @@ let
 in {
   # inherit all-nokx;
 
-  golden_rust = callPackage ./golden_rust { };
+  golden_rust_cli = callPackage ./golden_rust { };
 
 }

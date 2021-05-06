@@ -11,6 +11,7 @@ let
   };
 
   pythonPackageOverrides = import ./python-modules;
+  rustPackageOverrides = import ./rust-modules;
 
 in {
   inherit commonMeta;
@@ -20,7 +21,7 @@ in {
 
   golden_cpp = callPackage ./golden_cpp { };
   golden_python_cli = super.python3Packages.golden_python_cli;
-  golden_rust = callPackage ./golden_rust { };
+  golden_rust_cli = (rustPackageOverrides self super).golden_rust_cli;
 
   python37 = super.python37.override (old: {
     packageOverrides =
