@@ -22,7 +22,7 @@ in {
 
   golden_cpp = callPackage ./golden_cpp { };
   golden_python_cli = super.python3Packages.golden_python_cli;
-  inherit (rustPackages) golden_rust_cli moonracker;
+  inherit (rustPackages) golden_rust_cli moonraker;
 
   python37 = super.python37.override (old: {
     packageOverrides =

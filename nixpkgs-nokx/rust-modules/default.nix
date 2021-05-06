@@ -3,14 +3,14 @@ rust-self: rust-super:
 let
   inherit (rust-super) callPackage lib;
 
-  all-nokx = with rust-self; [ golden_rust_cli moonracker ];
+  all-nokx = with rust-self; [ golden_rust_cli moonraker ];
 
 in {
   inherit all-nokx;
 
   golden_rust_cli = callPackage ./golden_rust { };
 
-  moonracker = callPackage ./moonracker {
+  moonraker = callPackage ./moonraker {
     rustSpecific = rust-self.latest.rustChannels.nightly.rust;
   };
 

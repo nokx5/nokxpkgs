@@ -4,12 +4,12 @@ rustPlatform.buildRustPackage rec {
   cargo = rustSpecific;
   rustc = rustSpecific;
 
-  pname = "moonracker";
+  pname = "moonraker";
   version = "0.0.0";
 
   src = fetchgit {
-    url = "https://github.com/nokx5/golden_rust.git";
-    rev = "b416305b23044cb27a6f9801e968865a7ac9d8e4";
+    url = "https://github.com/nokx5/moonraker.git";
+    rev = "e603ef717b165a4145782ebd676bdf7cd221b4ee";
     sha256 = "sha256:1nzlkh41y3y80wdcm6sr8hsbxakjajvygidkwv361g0771g8m0c5";
   };
 
@@ -17,7 +17,7 @@ rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = [ ];
 
-  cargoSha256 = "01l2910x6r2z5vsdakz4m7xrzfnrkji6k3x8l5spkk2nqnzcby50";
+  cargoSha256 = "1d77nwk4kagdfh1g7v7wmk8pnhqw5r96p602bl0fivb26clq0wzr";
 
   meta = commonMeta // { description = "Golden Project For Rust Code"; };
 }
