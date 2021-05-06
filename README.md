@@ -104,6 +104,8 @@ Don't forget to update and clean sometimes your nix store. :wink:
 - [x] [speedo](https://github.com/nokx5/speedo)
 ***
 **Rust projects**
+- [] [golden_rust](https://github.com/nokx5/golden_rust)
+- [] [moonraker](https://github.com/nokx5/moonraker)
 ***
 **Scripts & Automation**
 ***
