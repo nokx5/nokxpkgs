@@ -1,14 +1,14 @@
-{ commonMeta, lib, fetchgit, buildPythonPackage, buildPythonApplication, fastapi
-, prometheus_client, pycurl, pydantic, pytestCheckHook, sqlalchemy-utils
-, uvicorn, alembic, mock }:
+{ commonMeta, lib, fetchgit, buildPythonPackage, buildPythonApplication, alembic
+, fastapi, mock, prometheus_client, pycurl, pydantic, pytestCheckHook
+, sqlalchemy-utils, uvicorn }:
 
 let
-  version = "1.0.0";
+  version = "1.0";
 
   src = fetchgit {
     url = "https://github.com/nokx5/speedo.git";
-    rev = "75c59ddadd51116a1dd3c3636f8c7247eebeb370";
-    sha256 = "sha256:0q49pyizsgjgd1kjmdbn545n2qj23i3y8kqs1893f8fxpa2hfx98";
+    rev = version;
+    sha256 = "sha256:1akxlgc5gjl9b7y4w01jqazm5ra206mvzvyn11vzzx8jds4k6qzw";
   };
 
   checkInputs = [ pytestCheckHook mock fastapi prometheus_client ];
