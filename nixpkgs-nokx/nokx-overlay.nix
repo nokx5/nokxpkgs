@@ -15,8 +15,8 @@ let
 in {
   inherit commonMeta;
 
-  all-nokx =
-    (with self; [ golden_cpp golden_python_cli ] ++ python3Packages.all-nokx);
+  all-nokx = (with self;
+    [ golden_cpp golden_python_cli speedo ] ++ python3Packages.all-nokx);
 
   golden_cpp = callPackage ./golden_cpp { };
   golden_python_cli = super.python3Packages.golden_python_cli;
@@ -36,5 +36,7 @@ in {
       super.stdenv.lib.composeExtensions (old.packageOverrides or (_: _: { }))
       pythonPackageOverrides;
   });
+
+  speedo = super.python3Packages.speedo;
 
 }
