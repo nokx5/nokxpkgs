@@ -11,17 +11,18 @@ let
   };
 
   pythonPackageOverrides = import ./python-modules;
-  rustPackageOverrides = import ./rust-modules;
+  rustPackages = import ./rust-modules self super;
 
 in {
   inherit commonMeta;
 
   all-nokx = (with self;
-    [ golden_cpp golden_python_cli speedo ] ++ python3Packages.all-nokx);
+    [ golden_cpp golden_python_cli speedo ] ++ python3Packages.all-nokx
+    ++ rustPackages.all-nokx);
 
   golden_cpp = callPackage ./golden_cpp { };
   golden_python_cli = super.python3Packages.golden_python_cli;
-  golden_rust_cli = (rustPackageOverrides self super).golden_rust_cli;
+  inherit (rustPackages) golden_rust_cli moonracker;
 
   python37 = super.python37.override (old: {
     packageOverrides =

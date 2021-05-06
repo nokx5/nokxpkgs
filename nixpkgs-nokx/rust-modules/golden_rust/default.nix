@@ -17,5 +17,6 @@ rustPlatform.buildRustPackage rec {
   cargoSha256 = "08n7jhpyw7kd0rrzw0q2m6xsjsij3i5bzyp1dxc6v1mwvw3l7ax7";
 
   meta = commonMeta // { description = "Golden Project For Rust Code"; };
+
 }
 

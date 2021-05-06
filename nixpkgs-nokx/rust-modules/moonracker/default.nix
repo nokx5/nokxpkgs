@@ -1,27 +1,23 @@
-{}:
+{ lib, commonMeta, fetchgit, rustPlatform, rustSpecific }:
 
-let
-  inherit (rust-self) callPackage;
+rustPlatform.buildRustPackage rec {
+  cargo = rustSpecific;
+  rustc = rustSpecific;
 
-  inherit (super) stdenv;
-  inherit (stdenv) lib;
+  pname = "moonracker";
+  version = "0.0.0";
 
-  mozilla-src = pkgs.fetchFromGitHub {
-      owner = "mozilla";
-      repo = "nixpkgs-mozilla";
-      rev = "9f35c4b09fd44a77227e79ff0c1b4b6a69dff533";
-      sha256 = "18h0nvh55b5an4gmlgfbvwbyqj91bklf1zymis6lbdh75571qaz0";
-   };
+  src = fetchgit {
+    url = "https://github.com/nokx5/golden_rust.git";
+    rev = "b416305b23044cb27a6f9801e968865a7ac9d8e4";
+    sha256 = "sha256:1nzlkh41y3y80wdcm6sr8hsbxakjajvygidkwv361g0771g8m0c5";
+  };
 
-  mozilla-rust-overlay = import "${mozilla-src.out}/rust-overlay.nix" pkgs pkgs;
-  rust-nightly = mozilla-rust-overlay.rustChannels.nightly.rust;
-  rustc-nightly = mozilla-rust-overlay.rustChannels.nightly.rustc;
-  cargo-nightly = mozilla-rust-overlay.rustChannels.nightly.cargo;
+  buildInputs = [ ];
 
-in {
+  nativeBuildInputs = [ ];
 
-  golden_rust = callPackage ./golden_rust { };
+  cargoSha256 = "01l2910x6r2z5vsdakz4m7xrzfnrkji6k3x8l5spkk2nqnzcby50";
 
-  roxy = callPackage ./golden_rust { };
-
+  meta = commonMeta // { description = "Golden Project For Rust Code"; };
 }
