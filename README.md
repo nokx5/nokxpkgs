@@ -90,13 +90,18 @@ Don't forget to update and clean sometimes your nix store. :wink:
 **C/C++ projects**
 - [x] [golden_cpp](https://github.com/nokx5/golden_cpp)
 ***
+**C++/Python projects**
+- [x] [python3Packages.golden_binding](https://github.com/nokx5/golden_binding)
+***
 **Go projects**
 ***
 **Python projects**
 - [x] [golden_python_cli](https://github.com/nokx5/golden_python)
-- [x] [python3Packages.golden_binding](https://github.com/nokx5/golden_binding)
 - [x] [python3Packages.golden_python](https://github.com/nokx5/golden_python)
 - [x] [python3Packages.golden_python_cli](https://github.com/nokx5/golden_python)
+- [x] [python3Packages.speedo](https://github.com/nokx5/speedo)
+- [x] [python3Packages.speedo_client](https://github.com/nokx5/speedo)
+- [x] [speedo](https://github.com/nokx5/speedo)
 ***
 **Rust projects**
 ***
