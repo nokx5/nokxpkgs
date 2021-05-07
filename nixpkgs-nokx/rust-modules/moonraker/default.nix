@@ -1,8 +1,6 @@
-{ lib, commonMeta, fetchgit, rustPlatform, rustSpecific }:
+{ lib, commonMeta, fetchgit, rustPlatform }:
 
 rustPlatform.buildRustPackage rec {
-  cargo = rustSpecific;
-  rustc = rustSpecific;
 
   pname = "moonraker";
   version = "0.0.0";
