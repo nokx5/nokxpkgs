@@ -8,7 +8,7 @@ let
     cargo = rust-self.latest.rustChannels.nightly.rust;
   };
 
-  all-nokx = with rust-self; [ golden_rust_cli golden_rust_nightly_cli moonraker ];
+  all-nokx = with rust-self; [ golden_rust_cli golden_rust_nightly_cli ];
 
 in {
   inherit all-nokx;
@@ -17,6 +17,7 @@ in {
   golden_rust_nightly_cli =
     callPackage ./golden_rust { rustPlatform = nightlyPlatform; };
 
+  # requires buildRustCrate
   moonraker = callPackage ./moonraker { rustPlatform = nightlyPlatform; };
 
 }
