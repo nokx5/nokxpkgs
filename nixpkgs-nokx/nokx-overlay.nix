@@ -3,6 +3,9 @@ self: super:
 let
   inherit (super) callPackage lib;
 
+  nokx-dev = (with self; [ emacs-nox nix git typora ]);
+  nokx-doc = (with self; [ hugo jekyll plantuml ]);
+
   commonMeta = {
     description = "another nokx software";
     maintainers = with self.config.maintainers; [ nokx ];
@@ -14,6 +17,8 @@ let
 
 in {
   inherit commonMeta;
+
+  nokx-tools = nokx-dev ++ nokx-doc;
 
   all-nokx = (with self;
     [ golden_cpp golden_python_cli speedo ] ++ python3Packages.all-nokx);
