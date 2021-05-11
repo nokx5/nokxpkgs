@@ -2,7 +2,7 @@
 
 Welcome to the official **nokxpkgs** channel of [nokx](https://github.com/nokx5/)!
 
-This nokxpkgs channel contains all [*(overlayed)*](https://github.com/nokx5/nokxpkgs/blob/main/nixpkgs-nokx/default.nix) nokx softwares pinned with an official [**_stable_ nixpkgs**](https://github.com/nokx5/nokxpkgs/blob/main/default.nix#L5-L11) to help creating fully reproducible software expressions.
+This nokxpkgs channel contains all [*(overlayed)*](https://github.com/nokx5/nokxpkgs/blob/main/nixpkgs-nokx/default.nix) nokx softwares pinned with an official [**_stable_ nixpkgs**](https://github.com/nokx5/nokxpkgs/blob/main/default.nix#L5-L12) to help creating fully reproducible software expressions.
 
 ## How to use a nokx software
 
