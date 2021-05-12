@@ -1,15 +1,8 @@
 { }:
-
 let
-
-  # all standard upstream packages
-  pinned-pkgs = builtins.fetchTarball {
-    # example source: https://github.com/nixos/nixpkgs/archive/c00959877fb06b09468562518b408acda886c79e.tar.gz";
-    # - get the SHA256 hash using: nix-prefetch-url --unpack <url>
+  flake = (import (fetchTarball {
     url =
-      "https://github.com/NixOS/nixpkgs/archive/eb7e1ef185f6c990cda5f71fdc4fb02e76ab06d5.tar.gz";
-    sha256 = "1ibz204c41g7baqga2iaj11yz9l75cfdylkiqjnk5igm81ivivxg";
-  };
-
-in import pinned-pkgs { overlays = (map (x: import x) [ ./nixpkgs-nokx ]); }
-
+      "https://github.com/edolstra/flake-compat/archive/99f1c2157fba4bfe6211a321fd0ee43199025dbf.tar.gz";
+    sha256 = "0x2jn3vrawwv9xp15674wjz9pixwjyj3j771izayl962zziivbx2";
+  }) { src = ./.; }).defaultNix;
+in flake.outputs.packages.x86_64-linux

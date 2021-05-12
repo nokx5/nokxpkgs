@@ -1,0 +1,195 @@
+{
+  "nodes": {
+    "golden-cpp": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1623105634,
+        "narHash": "sha256-fCoqLVUpjoXkEM9lNCSMPsoz8tT8G38ZzOwOUrv2Qw0=",
+        "owner": "nokx5",
+        "repo": "golden-cpp",
+        "rev": "c3b589859e4ea127c985085c7065fc07fb552b8e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nokx5",
+        "ref": "main",
+        "repo": "golden-cpp",
+        "type": "github"
+      }
+    },
+    "golden-go": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils_2"
+      },
+      "locked": {
+        "lastModified": 1623106121,
+        "narHash": "sha256-nHDjJGOGyO7NGzRg6x7ru1wKAbAaJqR44NkzdMo4xjw=",
+        "owner": "nokx5",
+        "repo": "golden-go",
+        "rev": "99b85e4cca8aee4fb12023aa57ccec03a485420b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nokx5",
+        "ref": "main",
+        "repo": "golden-go",
+        "type": "github"
+      }
+    },
+    "golden-pybind11": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils_3"
+      },
+      "locked": {
+        "lastModified": 1623106242,
+        "narHash": "sha256-/dSyjjJ521gabX2m5i9eYlAFqksvcNWNc5E0Mc3VGyQ=",
+        "owner": "nokx5",
+        "repo": "golden-pybind11",
+        "rev": "4a49949c0709f1a9c121b32e127cd1a7ae12d240",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nokx5",
+        "ref": "main",
+        "repo": "golden-pybind11",
+        "type": "github"
+      }
+    },
+    "golden-python": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils_4"
+      },
+      "locked": {
+        "lastModified": 1623106225,
+        "narHash": "sha256-TcmPINQazRLw3cQKoEdRCuFFe+RGQn05ANsq7jnc22o=",
+        "owner": "nokx5",
+        "repo": "golden-python",
+        "rev": "60c1febf103b4cd16319494ccc26ada8f51bcefc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nokx5",
+        "ref": "main",
+        "repo": "golden-python",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1620906248,
+        "narHash": "sha256-0+HAgrsaTQIfqqfZCXtrTbGX+TLX6cDOfOn/BN/Td5U=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0b14ea44a62b4724dc27ad70e4a6181a3d912c94",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "golden-cpp": "golden-cpp",
+        "golden-go": "golden-go",
+        "golden-pybind11": "golden-pybind11",
+        "golden-python": "golden-python",
+        "nixpkgs": "nixpkgs",
+        "utils": "utils_5"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1620759905,
+        "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b543720b25df6ffdfcf9227afafc5b8c1fabfae8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_2": {
+      "locked": {
+        "lastModified": 1620759905,
+        "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b543720b25df6ffdfcf9227afafc5b8c1fabfae8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_3": {
+      "locked": {
+        "lastModified": 1620759905,
+        "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b543720b25df6ffdfcf9227afafc5b8c1fabfae8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_4": {
+      "locked": {
+        "lastModified": 1620759905,
+        "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b543720b25df6ffdfcf9227afafc5b8c1fabfae8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_5": {
+      "locked": {
+        "lastModified": 1620759905,
+        "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b543720b25df6ffdfcf9227afafc5b8c1fabfae8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
