@@ -4,11 +4,11 @@ let
 
   # all standard upstream packages
   pinned-pkgs = builtins.fetchTarball {
-    # example source: https://github.com/nixos/nixpkgs/archive/c00959877fb06b09468562518b408acda886c79e.tar.gz";
+    # example source: https://github.com/NixOs/nixpkgs/archive/nixpkgs-unstable/0b14ea44a62b4724dc27ad70e4a6181a3d912c94.tar.gz";
     # - get the SHA256 hash using: nix-prefetch-url --unpack <url>
     url =
-      "https://github.com/NixOS/nixpkgs/archive/8a0c5da648702f4620e3a2926f48b38dd1d86562.tar.gz";
-    sha256 = "0y84yknvgkkchkdpydh7klq4kfi73mzb5g7830xd17gzjj5chav9";
+      "https://github.com/NixOs/nixpkgs/archive/nixpkgs-unstable/main.tar.gz";
+    sha256 = "sha256:15bpsggh9zz9gk7c1sfp6bwrgcadddxhknd7m8gh4k8spf1c1qfk";
   };
 
 in import pinned-pkgs {
