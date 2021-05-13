@@ -3,8 +3,8 @@ self: super:
 let
   inherit (super) callPackage lib;
 
-  # nokx-dev = (with self; [ emacs-nox nix git typora ]);
-  # nokx-doc = (with self; [ hugo jekyll plantuml ]);
+  nokx-dev = (with self; [ emacs-nox nix git typora ]);
+  nokx-doc = (with self; [ hugo jekyll plantuml ]);
 
   commonMeta = {
     description = "another nokx software";
@@ -14,19 +14,20 @@ let
   };
 
   # pythonPackageOverrides = import ./python-modules;
-  # rustPackages = import ./rust-modules self super;
+  # # rustPackages = import ./rust-modules self super;
 
 in {
   inherit commonMeta;
 
-  # nokx-tools = nokx-dev ++ nokx-doc;
+  nokx-tools = nokx-dev ++ nokx-doc;
 
-  # all-nokx = (with self;
-  #   [ golden_cpp golden_python_cli speedo ] ++ python3Packages.all-nokx
+  all-nokx = (with self; [ golden_cpp ]);
+  # golden_python_cli speedo
+  #  ] ++ python3Packages.all-nokx
   #   ++ rustPackages.all-nokx);
 
   golden_cpp = callPackage ./golden_cpp { };
-  # golden_python_cli = super.python3Packages.golden_python_cli;
+  golden_python_cli = super.python3Packages.golden_python_cli;
   # inherit (rustPackages) golden_rust_cli golden_rust_nightly_cli moonraker;
 
   # python37 = super.python37.override (old: {
