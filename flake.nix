@@ -7,7 +7,7 @@
   };
 
   outputs = { self, nixpkgs, utils }:
-    let overlay = import ./.;
+    let overlay = final: prev: import ./nokx-overlay.nix final prev;
     in {
       overlay = final: prev: overlay final prev;
     } // utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" ]
