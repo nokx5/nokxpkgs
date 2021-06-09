@@ -46,15 +46,15 @@
 
           all-nokx = (with pkgs; [ speedo ])
             ++ (with pkgs.python3Packages; [ speedo_client ])
-            ++ (with self.packages.${system}; [
-              golden-cpp
-              golden-cpp-clang
-              golden-pybind11
-              golden-pybind11-clang
-              golden-python
-              golden-python-app
-              golden-go
-            ]);
+            ++ [
+              golden-cpp.packages.${system}.golden-cpp
+              golden-cpp.packages.${system}.golden-cpp-clang
+              golden-pybind11.packages.${system}.golden-pybind11
+              golden-pybind11.packages.${system}.golden-pybind11-clang
+              golden-python.packages.${system}.golden-python
+              golden-python.packages.${system}.golden-python-app
+              golden-go.packages.${system}.golden-go
+            ];
         };
         defaultPackage = self.packages.${system}.speedo;
       });
