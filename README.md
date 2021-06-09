@@ -57,9 +57,6 @@ All [nokx](https://github.com/nokx5/) softwares started with a nix shell script,
     nix-shell -I nixpkgs=https://github.com/nokx5/nokxpkgs/archive/main.tar.gz default-shell.nix
     ```
 
-3. You can use the overlay `nixpkgs-nokx` directly in your nix script but let's not confuse anyone at this point.
-
-4. Us~~e the `flakes.nix` directly.~~ Let's be honest, I'm still working on this experimental feature. :blush:
 
 ### Add nokxpkgs to your nix channel
 
@@ -95,8 +92,11 @@ Don't forget to update and clean sometimes your nix store. :wink:
 ***
 **Go projects**
 
+- [x]  [golden-go](https://github.com/nokx5/golden-go)
+
 ***
 **Python projects**
+
 - [x] [golden-python_cli](https://github.com/nokx5/golden-python)
 - [x] [python3Packages.golden-python](https://github.com/nokx5/golden-python)
 - [x] [python3Packages.golden-python_cli](https://github.com/nokx5/golden-python)
@@ -105,6 +105,9 @@ Don't forget to update and clean sometimes your nix store. :wink:
 - [x] [speedo](https://github.com/nokx5/speedo)
 ***
 **Rust projects**
+
+- [ ] [golden-rust](https://github.com/nokx5/golden-rust)
+
 ***
 **Scripts & Automation**
 
