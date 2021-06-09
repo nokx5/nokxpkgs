@@ -6,10 +6,10 @@ This nokxpkgs channel contains all [*(overlayed)*](https://github.com/nokx5/nokx
 
 ## How to use a nokx software
 
-Here we explain how to use a nokx software pinned according to a specific release ([`0c42647`](https://github.com/nokx5/nokxpkgs/commit/0c426477b0366270c6dea904f427ed8b15e39a4f)). We illustrate this with the **golden_cpp** software.
+Here we explain how to use a nokx software pinned according to a specific release ([`d954b48`](https://github.com/nokx5/nokxpkgs/commit/d954b48c88291402730166a8e3a37dd9d2915bc9)). We illustrate this with the **golden-cpp** software.
 
 ```bash
-nix-shell -I nixpkgs=https://github.com/nokx5/nokxpkgs/archive/0c426477b0366270c6dea904f427ed8b15e39a4f.tar.gz --pure -p golden_cpp
+nix-shell -I nixpkgs=https://github.com/nokx5/nokxpkgs/archive/d954b48c88291402730166a8e3a37dd9d2915bc9.tar.gz --pure -p golden-cpp
 
 $ cli_golden_cpp
 Welcome to nokx cpp golden project!
@@ -30,20 +30,20 @@ All [nokx](https://github.com/nokx5/) softwares started with a nix shell script,
     ```bash
     # you can avoid this export by adding nokxpkgs to your channels
     export NIX_PATH=nokxpkgs=https://github.com/nokx5/nokxpkgs/archive/main.tar.gz
-
+    
     # option 1: develop the local software
     nix-shell -A dev
     $ exit
-
+    
     # option 2: build the local software
     nix-build -A dev
     unlink result*
-
+    
     # option 3: use your local changes
     nix-shell -I nixpkgs=$PWD -p dev
     $ exit
     ```
-    In general, you will find other available derivation within the `default.nix`, e.g. `-A golden_cpp` (no dev tools).
+    In general, you will find other available derivation within the `default.nix`, e.g. `-A golden-cpp` (no dev tools).
 
 
 2. Use the `default-shell.nix` :
@@ -87,19 +87,19 @@ Don't forget to update and clean sometimes your nix store. :wink:
 ***
 **C/C++ projects**
 
-- [x] [golden_cpp](https://github.com/nokx5/golden_cpp)
+- [x] [golden-cpp](https://github.com/nokx5/golden-cpp)
 ***
 **C++/Python projects**
 
-- [x] [python3Packages.golden_binding](https://github.com/nokx5/golden_binding)
+- [x] [python3Packages.golden-pybind11](https://github.com/nokx5/golden-pybind11)
 ***
 **Go projects**
 
 ***
 **Python projects**
-- [x] [golden_python_cli](https://github.com/nokx5/golden_python)
-- [x] [python3Packages.golden_python](https://github.com/nokx5/golden_python)
-- [x] [python3Packages.golden_python_cli](https://github.com/nokx5/golden_python)
+- [x] [golden-python_cli](https://github.com/nokx5/golden-python)
+- [x] [python3Packages.golden-python](https://github.com/nokx5/golden-python)
+- [x] [python3Packages.golden-python_cli](https://github.com/nokx5/golden-python)
 - [x] [python3Packages.speedo](https://github.com/nokx5/speedo)
 - [x] [python3Packages.speedo_client](https://github.com/nokx5/speedo)
 - [x] [speedo](https://github.com/nokx5/speedo)
@@ -115,7 +115,6 @@ Don't forget to update and clean sometimes your nix store. :wink:
 ****
 
 - [x] all-nokx
-- [ ] nokx-tools
 
 ***
 

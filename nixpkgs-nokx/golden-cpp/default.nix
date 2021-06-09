@@ -1,11 +1,11 @@
 { stdenv, fetchgit, commonMeta, catch2, boost, cmake, gnumake, ninja }:
 
 stdenv.mkDerivation rec {
-  pname = "golden_cpp";
+  pname = "golden-cpp";
   version = "0.0.1";
 
   src = fetchgit {
-    url = "https://github.com/nokx5/golden_cpp.git";
+    url = "https://github.com/nokx5/golden-cpp.git";
     rev = version;
     sha256 = "sha256:0kpd1cv4glg722a5a524lw25xwvcqjv34qyfrbw1p06gl9kh38d2";
   };
