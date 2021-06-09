@@ -4,9 +4,9 @@ let
   inherit (python-super) callPackage lib;
 
   all-nokx = with python-self; [
-    golden_binding
-    golden_python
-    golden_python_cli
+    golden-pybind11
+    golden-python
+    golden-python_cli
     speedo
     speedo_client
   ];
@@ -14,9 +14,9 @@ let
 in {
   inherit all-nokx;
 
-  golden_binding = callPackage ./golden_binding { };
+  golden-pybind11 = callPackage ./golden-pybind11 { };
 
-  inherit (callPackage ./golden_python { }) golden_python golden_python_cli;
+  inherit (callPackage ./golden-python { }) golden-python golden-python_cli;
 
   # disable test for fastapi
   starlette = python-super.starlette.overridePythonAttrs (oldAttrs: rec {

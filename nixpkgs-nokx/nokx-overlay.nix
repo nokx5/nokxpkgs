@@ -21,10 +21,10 @@ in {
   nokx-tools = nokx-dev ++ nokx-doc;
 
   all-nokx = (with self;
-    [ golden_cpp golden_python_cli speedo ] ++ python3Packages.all-nokx);
+    [ golden-cpp golden-python_cli speedo ] ++ python3Packages.all-nokx);
 
-  golden_cpp = callPackage ./golden_cpp { };
-  golden_python_cli = super.python3Packages.golden_python_cli;
+  golden-cpp = callPackage ./golden-cpp { };
+  golden-python_cli = super.python3Packages.golden-python_cli;
 
   python37 = super.python37.override (old: {
     packageOverrides =

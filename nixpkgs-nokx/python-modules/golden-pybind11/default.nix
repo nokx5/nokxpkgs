@@ -2,11 +2,11 @@
 , pytest, sphinx, sphinx_rtd_theme }:
 
 buildPythonPackage rec {
-  pname = "golden_binding";
+  pname = "golden-pybind11";
   version = "0.0.0";
 
   src = fetchgit {
-    url = "https://github.com/nokx5/golden_binding.git";
+    url = "https://github.com/nokx5/golden-pybind11.git";
     rev = version;
     sha256 = "sha256:112s4w9rpajhbv4ca72scn96rgydcfbn7wj9ymsbfm6x9ylcjp4q";
   };
