@@ -29,21 +29,19 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [ (import ./classic-overlays/nokx-overlay.nix) golden-cpp.overlay golden-python.overlay ];
+          overlays = [ (import ./classic-overlays/nokx-overlay.nix) golden-cpp.overlay golden-go.overlay golden-python.overlay ];
         };
 
       in rec {
         packages = pkgs // {
           inherit (golden-pybind11.packages.${system})
             golden-pybind11 golden-pybind11-clang;
-          inherit (golden-go.packages.${system}) golden-go;
 
-          all-nokx = (with pkgs; [ golden-cpp golden-cpp-clang golden-python golden-python-app speedo ])
+          all-nokx = (with pkgs; [ golden-cpp golden-cpp-clang golden-go golden-python golden-python-app speedo ])
             ++ (with pkgs.python3Packages; [ speedo_client ])
             ++ [
               golden-pybind11.packages.${system}.golden-pybind11
               golden-pybind11.packages.${system}.golden-pybind11-clang
-              golden-go.packages.${system}.golden-go
             ];
         };
         defaultPackage = self.packages.${system}.speedo;

@@ -25,15 +25,14 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "utils": "utils"
+        ]
       },
       "locked": {
-        "lastModified": 1623106121,
-        "narHash": "sha256-nHDjJGOGyO7NGzRg6x7ru1wKAbAaJqR44NkzdMo4xjw=",
+        "lastModified": 1626185336,
+        "narHash": "sha256-vyrsNIqQsjFzVm2dsn1SFmskRTnMp5DT33tmvrg0wyU=",
         "owner": "nokx5",
         "repo": "golden-go",
-        "rev": "99b85e4cca8aee4fb12023aa57ccec03a485420b",
+        "rev": "419ab1feeedc415e50bc72bd96d8e013f2bee623",
         "type": "github"
       },
       "original": {
@@ -48,7 +47,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_2"
+        "utils": "utils"
       },
       "locked": {
         "lastModified": 1623106242,
@@ -109,25 +108,10 @@
         "golden-pybind11": "golden-pybind11",
         "golden-python": "golden-python",
         "nixpkgs": "nixpkgs",
-        "utils": "utils_3"
+        "utils": "utils_2"
       }
     },
     "utils": {
-      "locked": {
-        "lastModified": 1622445595,
-        "narHash": "sha256-m+JRe6Wc5OZ/mKw2bB3+Tl0ZbtyxxxfnAWln8Q5qs+Y=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "7d706970d94bc5559077eb1a6600afddcd25a7c8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_2": {
       "locked": {
         "lastModified": 1620759905,
         "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
@@ -142,7 +126,7 @@
         "type": "github"
       }
     },
-    "utils_3": {
+    "utils_2": {
       "locked": {
         "lastModified": 1623875721,
         "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
