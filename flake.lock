@@ -46,15 +46,14 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "utils": "utils"
+        ]
       },
       "locked": {
-        "lastModified": 1623106242,
-        "narHash": "sha256-/dSyjjJ521gabX2m5i9eYlAFqksvcNWNc5E0Mc3VGyQ=",
+        "lastModified": 1626189077,
+        "narHash": "sha256-ooRsApJggxxXS8kw6xwLg7Ku716ILCf28GS39NlBM2I=",
         "owner": "nokx5",
         "repo": "golden-pybind11",
-        "rev": "4a49949c0709f1a9c121b32e127cd1a7ae12d240",
+        "rev": "7612ef0f5027971af80c38eea79a12df66338308",
         "type": "github"
       },
       "original": {
@@ -108,25 +107,10 @@
         "golden-pybind11": "golden-pybind11",
         "golden-python": "golden-python",
         "nixpkgs": "nixpkgs",
-        "utils": "utils_2"
+        "utils": "utils"
       }
     },
     "utils": {
-      "locked": {
-        "lastModified": 1620759905,
-        "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "b543720b25df6ffdfcf9227afafc5b8c1fabfae8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_2": {
       "locked": {
         "lastModified": 1623875721,
         "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
