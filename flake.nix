@@ -22,24 +22,32 @@
     };
   };
 
-  outputs = { self, nixpkgs, utils, golden-cpp, golden-go, golden-pybind11
-    , golden-python }:
-      utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-          overlays = [ (import ./classic-overlays/nokx-overlay.nix) golden-cpp.overlay golden-go.overlay golden-pybind11.overlay golden-python.overlay ];
-        };
+  outputs =
+    { self
+    , nixpkgs
+    , utils
+    , golden-cpp
+    , golden-go
+    , golden-pybind11
+    , golden-python
+    }:
+    utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
+    let
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [ (import ./classic-overlays/nokx-overlay.nix) golden-cpp.overlay golden-go.overlay golden-pybind11.overlay golden-python.overlay ];
+      };
 
-      in {
+    in
+    {
 
       # overlays = 
 
-        packages = {
-          all-nokx = (with pkgs; [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ])
-            ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
-        };
-      });
+      packages = {
+        all-nokx = (with pkgs; [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ])
+          ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
+      };
+    });
 
 }

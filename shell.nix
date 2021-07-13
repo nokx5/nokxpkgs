@@ -17,11 +17,11 @@ let
       ];
   };
 in
-   (mkShell.override {
-    stdenv = stdenvNoCC;
-  })
- {
-  nativeBuildInputs = [  gnumake ] ++ [
+(mkShell.override {
+  stdenv = stdenvNoCC;
+})
+{
+  nativeBuildInputs = [ gnumake ] ++ [
     bashCompletion
     cacert
     git

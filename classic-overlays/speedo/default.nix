@@ -1,6 +1,17 @@
-{ lib, fetchgit, buildPythonPackage, buildPythonApplication, alembic, fastapi
-, mock, prometheus_client, pycurl, pydantic, pytestCheckHook, sqlalchemy-utils
-, uvicorn }:
+{ lib
+, fetchgit
+, buildPythonPackage
+, buildPythonApplication
+, alembic
+, fastapi
+, mock
+, prometheus_client
+, pycurl
+, pydantic
+, pytestCheckHook
+, sqlalchemy-utils
+, uvicorn
+}:
 
 let
   version = "23d42bd6148eef845d7f11c992b17ae1bc2fbd6d";
@@ -14,7 +25,8 @@ let
   checkInputs =
     [ pytestCheckHook mock fastapi prometheus_client sqlalchemy-utils ];
 
-in {
+in
+{
   speedo_client = buildPythonPackage rec {
     pname = "speedo_client";
     inherit version src checkInputs;
