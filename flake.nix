@@ -24,35 +24,25 @@
 
   outputs = { self, nixpkgs, utils, golden-cpp, golden-go, golden-pybind11
     , golden-python }:
-    let
-      overlay = final: prev:
-        import ./classic-overlays/nokx-overlay.nix final prev;
-    in utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
+      utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
       let
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [ overlay ];
+          overlays = [ (import ./classic-overlays/nokx-overlay.nix) golden-cpp.overlay golden-python.overlay ];
         };
 
       in rec {
         packages = pkgs // {
-          inherit (golden-cpp.packages.${system}) golden-cpp golden-cpp-clang;
           inherit (golden-pybind11.packages.${system})
             golden-pybind11 golden-pybind11-clang;
-          inherit (golden-python.packages.${system})
-            golden-python golden-python-app;
           inherit (golden-go.packages.${system}) golden-go;
 
-          all-nokx = (with pkgs; [ speedo ])
+          all-nokx = (with pkgs; [ golden-cpp golden-cpp-clang golden-python golden-python-app speedo ])
             ++ (with pkgs.python3Packages; [ speedo_client ])
             ++ [
-              golden-cpp.packages.${system}.golden-cpp
-              golden-cpp.packages.${system}.golden-cpp-clang
               golden-pybind11.packages.${system}.golden-pybind11
               golden-pybind11.packages.${system}.golden-pybind11-clang
-              golden-python.packages.${system}.golden-python
-              golden-python.packages.${system}.golden-python-app
               golden-go.packages.${system}.golden-go
             ];
         };
