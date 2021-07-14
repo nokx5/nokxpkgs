@@ -44,9 +44,6 @@
         }
       );
 
-      repoName = "nokxpkgs";
-      #repoVersion = nixpkgsFor.x86_64-linux.nokxpkgs.version;
-      repoDescription = "nokx packages";
     in
     {
       overlays = {
@@ -60,25 +57,24 @@
         let pkgs = nixpkgsFor.${system}; in pkgs.callPackage ./shell.nix { }
       );
 
-      packages = forAllSystems (system:
-        with nixpkgsFor.${system}; rec {
-          all-nokx = stdenvNoCC.mkDerivation {
-            name = "all-nokx";
-            src = self;
-            unpackPhase = ":";
-            dontBuild = true;
-            nativeBuildInputs = [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ] ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
-            installPhase = ''
-              mkdir -p $out
-              echo "nix show-derivation $out # for full derivation information" > $out/README.md
-            '';
-          };
+      packages = forAllSystems
+        (system:
+          with nixpkgsFor.${system}; {
+            all-nokx = stdenvNoCC.mkDerivation {
+              name = "all-nokx";
+              src = self;
+              nativeBuildInputs = [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ] ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
+              installPhase = ''
+                mkdir -p $out
+                echo "nix show-derivation $out # for full derivation information" > $out/README.md
+              '';
+            };
+          }) // forDevSystems (system:
+        with nixpkgsFor.${system}; {
           all-nokx-dev = stdenvNoCC.mkDerivation {
             name = "all-nokx-dev";
             src = self;
-            unpackPhase = ":";
-            dontBuild = true;
-            nativeBuildInputs = [ all-nokx ] ++ [
+            nativeBuildInputs = [
               golden-cpp.devShell.${system}.inputDerivation
               golden-go.devShell.${system}.inputDerivation
               golden-python.devShell.${system}.inputDerivation
