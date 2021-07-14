@@ -57,38 +57,40 @@
         let pkgs = nixpkgsFor.${system}; in pkgs.callPackage ./shell.nix { }
       );
 
-      packages = forAllSystems
-        (system:
-          let pkgs = nixpkgsFor.${system}; in
-          rec {
-            all-nokx = pkgs.stdenvNoCC.mkDerivation {
-              name = "all-nokx";
-              src = self;
-              nativeBuildInputs = [ pkgs.golden-cpp pkgs.golden-cpp-clang pkgs.golden-go pkgs.golden-python-app pkgs.speedo pkgs.python3Packages.golden-pybind11 pkgs.python3Packages.golden-pybind11-clang pkgs.python3Packages.golden-python pkgs.python3Packages.speedo_client ];
-              installPhase = ''
-                mkdir -p $out
-                echo "nix show-derivation $out # for full derivation information" > $out/README.md
-              '';
-            };
-            all-nokx-dev =
-              if (builtins.elem system devSystems) then
-                pkgs.stdenvNoCC.mkDerivation
-                  {
-                    name = "all-nokx-dev";
-                    src = self;
-                    nativeBuildInputs = [
-                      golden-cpp.devShell.${system}.inputDerivation
-                      golden-go.devShell.${system}.inputDerivation
-                      golden-python.devShell.${system}.inputDerivation
-                      golden-pybind11.devShell.${system}.inputDerivation
-                      self.devShell.${system}.inputDerivation
-                    ];
-                    installPhase = ''
-                      mkdir -p $out
-                      echo "nix show-derivation $out # for full derivation information" > $out/README.md
-                    '';
-                  } else all-nokx;
-          });
+      packages = forAllSystems (system:
+        let pkgs = nixpkgsFor.${system}; in
+        pkgs // # this line breaks nix check flake !! But the line is necessary to become a nix channel
+        {
+          all-nokx = pkgs.stdenvNoCC.mkDerivation {
+            name = "all-nokx";
+            src = self;
+            nativeBuildInputs = [ pkgs.golden-cpp pkgs.golden-cpp-clang pkgs.golden-go pkgs.golden-python-app pkgs.speedo pkgs.python3Packages.golden-pybind11 pkgs.python3Packages.golden-pybind11-clang pkgs.python3Packages.golden-python pkgs.python3Packages.speedo_client ];
+            installPhase = ''
+              mkdir -p $out
+              echo "nix show-derivation $out # for full derivation information" > $out/README.md
+            '';
+          };
+
+          all-nokx-dev-full =
+            if (builtins.elem system devSystems) then
+              pkgs.stdenvNoCC.mkDerivation
+                {
+                  name = "all-nokx-dev";
+                  src = self;
+                  nativeBuildInputs = [
+                    golden-cpp.devShell.${system}.inputDerivation
+                    golden-go.devShell.${system}.inputDerivation
+                    golden-python.devShell.${system}.inputDerivation
+                    golden-pybind11.devShell.${system}.inputDerivation
+                    self.devShell.${system}.inputDerivation
+                  ];
+                  installPhase = ''
+                    mkdir -p $out
+                    echo "nix show-derivation $out # for full derivation information" > $out/README.md
+                  '';
+                } else pkgs.golden-cpp;
+
+        });
 
     };
 }
