@@ -67,7 +67,7 @@
             src = self;
             unpackPhase = ":";
             dontBuild = true;
-            buildInputs = [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ] ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
+            nativeBuildInputs = [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ] ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
             installPhase = ''
               mkdir -p $out
               echo "nix show-derivation $out # for full derivation information" > $out/README.md
@@ -78,7 +78,7 @@
             src = self;
             unpackPhase = ":";
             dontBuild = true;
-            buildInputs = [ all-nokx ] ++ [
+            nativeBuildInputs = [ all-nokx ] ++ [
               golden-cpp.devShell.${system}.inputDerivation
               golden-go.devShell.${system}.inputDerivation
               golden-python.devShell.${system}.inputDerivation
