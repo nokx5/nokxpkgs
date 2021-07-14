@@ -59,11 +59,12 @@
 
       packages = forAllSystems
         (system:
-          with nixpkgsFor.${system}; rec {
-            all-nokx = stdenvNoCC.mkDerivation {
+          let pkgs = nixpkgsFor.${system}; in
+          rec {
+            all-nokx = pkgs.stdenvNoCC.mkDerivation {
               name = "all-nokx";
               src = self;
-              nativeBuildInputs = [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ] ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
+              nativeBuildInputs = [ pkgs.golden-cpp pkgs.golden-cpp-clang pkgs.golden-go pkgs.golden-python-app pkgs.speedo pkgs.python3Packages.golden-pybind11 pkgs.python3Packages.golden-pybind11-clang pkgs.python3Packages.golden-python pkgs.python3Packages.speedo_client ];
               installPhase = ''
                 mkdir -p $out
                 echo "nix show-derivation $out # for full derivation information" > $out/README.md
@@ -71,7 +72,7 @@
             };
             all-nokx-dev =
               if (builtins.elem system devSystems) then
-                stdenvNoCC.mkDerivation
+                pkgs.stdenvNoCC.mkDerivation
                   {
                     name = "all-nokx-dev";
                     src = self;
