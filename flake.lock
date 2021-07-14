@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1626176890,
-        "narHash": "sha256-JIA9gTF3v3jwRUj9Pcl/XsGo7PUrU8r+4agONjbGh2k=",
+        "lastModified": 1626301868,
+        "narHash": "sha256-34gjjSWoyWL+EFaAR12wMKBCCaKv4cUp2+Q3ANED4ac=",
         "owner": "nokx5",
         "repo": "golden-cpp",
-        "rev": "522e9e294b63d70ea76b34c683dc2812053c2956",
+        "rev": "5cf931069ff83529cc87560bc32e1072d9291d1e",
         "type": "github"
       },
       "original": {
@@ -49,11 +49,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1626189077,
-        "narHash": "sha256-ooRsApJggxxXS8kw6xwLg7Ku716ILCf28GS39NlBM2I=",
+        "lastModified": 1626302296,
+        "narHash": "sha256-IFne9FBM6DttNMOSq3U1xgHLMgvRnn/HJyL6VpgNYBw=",
         "owner": "nokx5",
         "repo": "golden-pybind11",
-        "rev": "7612ef0f5027971af80c38eea79a12df66338308",
+        "rev": "61d12232915ad0773890af599bfcedeb328eb9c8",
         "type": "github"
       },
       "original": {
