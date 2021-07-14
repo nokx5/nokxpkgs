@@ -61,10 +61,34 @@
       );
 
       packages = forAllSystems (system:
-        with nixpkgsFor.${system}; {
-          all-nokx = symlinkJoin {
+        with nixpkgsFor.${system}; rec {
+          all-nokx = stdenvNoCC.mkDerivation {
             name = "all-nokx";
-            paths = [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ] ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
+            src = self;
+            unpackPhase = ":";
+            dontBuild = true;
+            buildInputs = [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ] ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
+            installPhase = ''
+              mkdir -p $out
+              echo "nix show-derivation $out # for full derivation information" > $out/README.md
+            '';
+          };
+          all-nokx-devShell = stdenvNoCC.mkDerivation {
+            name = "all-nokx-dev";
+            src = self;
+            unpackPhase = ":";
+            dontBuild = true;
+            buildInputs = [ all-nokx ] ++ [
+              golden-cpp.devShell.${system}.inputDerivation
+              golden-go.devShell.${system}.inputDerivation
+              golden-python.devShell.${system}.inputDerivation
+              golden-pybind11.devShell.${system}.inputDerivation
+              self.devShell.${system}.inputDerivation
+            ];
+            installPhase = ''
+              mkdir -p $out
+              echo "nix show-derivation $out # for full derivation information" > $out/README.md
+            '';
           };
         });
 
