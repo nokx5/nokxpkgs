@@ -59,7 +59,7 @@
 
       packages = forAllSystems
         (system:
-          with nixpkgsFor.${system}; {
+          with nixpkgsFor.${system}; rec {
             all-nokx = stdenvNoCC.mkDerivation {
               name = "all-nokx";
               src = self;
@@ -69,24 +69,25 @@
                 echo "nix show-derivation $out # for full derivation information" > $out/README.md
               '';
             };
-          }) // forDevSystems (system:
-        with nixpkgsFor.${system}; {
-          all-nokx-dev = stdenvNoCC.mkDerivation {
-            name = "all-nokx-dev";
-            src = self;
-            nativeBuildInputs = [
-              golden-cpp.devShell.${system}.inputDerivation
-              golden-go.devShell.${system}.inputDerivation
-              golden-python.devShell.${system}.inputDerivation
-              golden-pybind11.devShell.${system}.inputDerivation
-              self.devShell.${system}.inputDerivation
-            ];
-            installPhase = ''
-              mkdir -p $out
-              echo "nix show-derivation $out # for full derivation information" > $out/README.md
-            '';
-          };
-        });
+            all-nokx-dev =
+              if (builtins.elem system devSystems) then
+                stdenvNoCC.mkDerivation
+                  {
+                    name = "all-nokx-dev";
+                    src = self;
+                    nativeBuildInputs = [
+                      golden-cpp.devShell.${system}.inputDerivation
+                      golden-go.devShell.${system}.inputDerivation
+                      golden-python.devShell.${system}.inputDerivation
+                      golden-pybind11.devShell.${system}.inputDerivation
+                      self.devShell.${system}.inputDerivation
+                    ];
+                    installPhase = ''
+                      mkdir -p $out
+                      echo "nix show-derivation $out # for full derivation information" > $out/README.md
+                    '';
+                  } else all-nokx;
+          });
 
     };
 }

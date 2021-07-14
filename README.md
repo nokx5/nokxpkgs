@@ -146,3 +146,16 @@ nixfmt $(find -name "*.nix")
 ```bash
 nix-shell maintainers/scripts/update.nix --argstr package PACKAGE --argstr revision REVISION --show-trace
 ```
+
+add env to cache
+```bash
+nix-build . -A all-nokx --out-link dev-link
+nix-build . -A all-nokx-dev --out-link dev-link-full
+# experimental features
+nix develop .#all-nokx --profile dev-profile
+nix develop .#all-nokx-dev --profile dev-profile-full
+nix build .#all-nokx --out-link dev-link
+nix build .#all-nokx-dev --out-link dev-link-full
+```
+
+
