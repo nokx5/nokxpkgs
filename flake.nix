@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    utils.url = "github:numtide/flake-utils";
     golden-cpp = {
       url = "github:nokx5/golden-cpp/main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,29 +24,49 @@
   outputs =
     { self
     , nixpkgs
-    , utils
     , golden-cpp
     , golden-go
     , golden-pybind11
     , golden-python
     }:
-    utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
     let
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [ (import ./classic-overlays/nokx-overlay.nix) golden-cpp.overlay golden-go.overlay golden-pybind11.overlay golden-python.overlay ];
-      };
+      forCustomSystems = custom: f: nixpkgs.lib.genAttrs custom (system: f system);
+      allSystems = [ "x86_64-linux" "i686-linux" "aarch64-linux" "x86_64-darwin" ];
+      devSystems = [ "x86_64-linux" "x86_64-darwin" ];
+      forAllSystems = forCustomSystems allSystems;
+      forDevSystems = forCustomSystems devSystems;
 
+      nixpkgsFor = forAllSystems (system:
+        import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = with self.overlays; [ classic-overlay golden-cpp-overlay golden-go-overlay golden-pybind11-overlay golden-python-overlay ];
+        }
+      );
+
+      repoName = "nokxpkgs";
+      #repoVersion = nixpkgsFor.x86_64-linux.nokxpkgs.version;
+      repoDescription = "nokx packages";
     in
     {
-
-      # overlays = 
-
-      packages = {
-        all-nokx = (with pkgs; [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ])
-          ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
+      overlays = {
+        classic-overlay = final: prev: (import ./classic-overlays/nokx-overlay.nix) final prev;
+        golden-cpp-overlay = golden-cpp.overlay;
+        golden-go-overlay = golden-go.overlay;
+        golden-pybind11-overlay = golden-pybind11.overlay;
+        golden-python-overlay = golden-python.overlay;
       };
-    });
+      devShell = forDevSystems (system:
+        let pkgs = nixpkgsFor.${system}; in pkgs.callPackage ./shell.nix { }
+      );
 
+      packages = forAllSystems (system:
+        with nixpkgsFor.${system}; {
+          all-nokx = symlinkJoin {
+            name = "all-nokx";
+            paths = [ golden-cpp golden-cpp-clang golden-go golden-python-app speedo ] ++ (with pkgs.python3Packages; [ golden-pybind11 golden-pybind11-clang golden-python speedo_client ]);
+          };
+        });
+
+    };
 }
