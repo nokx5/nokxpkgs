@@ -4,6 +4,9 @@
 .*.swo
 result
 result-*
+dev
+dev*
+dev-*
 /doc/NEWS.html
 /doc/NEWS.txt
 /doc/manual.html
