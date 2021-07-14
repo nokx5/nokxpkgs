@@ -57,6 +57,24 @@
         let pkgs = nixpkgsFor.${system}; in pkgs.callPackage ./shell.nix { }
       );
 
+      hydraJobs = {
+
+        build-all = forDevSystems (system: self.packages.${system}.all-nokx);
+
+        release = forDevSystems (system:
+          with nixpkgsFor.${system}; releaseTools.aggregate
+            {
+              name = "nokxpkgs-release";
+              constituents =
+                [
+                  self.hydraJobs.build-all.${system}
+                ] ++ lib.optionals (hostPlatform.isLinux) [ ];
+              meta.description = "hydraJobs: nokxpkgs contains all packages of nokx";
+            });
+
+      };
+
+
       packages = forAllSystems (system:
         let pkgs = nixpkgsFor.${system}; in
         pkgs // # this line breaks nix check flake !! But the line is necessary to become a nix channel
