@@ -73,7 +73,7 @@
               echo "nix show-derivation $out # for full derivation information" > $out/README.md
             '';
           };
-          all-nokx-devShell = stdenvNoCC.mkDerivation {
+          all-nokx-dev = stdenvNoCC.mkDerivation {
             name = "all-nokx-dev";
             src = self;
             unpackPhase = ":";
