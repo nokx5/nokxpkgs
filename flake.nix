@@ -60,6 +60,7 @@
       hydraJobs = {
 
         build-all = forDevSystems (system: self.packages.${system}.all-nokx);
+        build-all-dev = forDevSystems (system: self.packages.${system}.all-nokx.inputDerivation);
         build-all-dev-full = forDevSystems (system: self.packages.${system}.all-nokx-dev-full);
 
         release = forDevSystems (system:
@@ -69,7 +70,8 @@
               constituents =
                 [
                   self.hydraJobs.build-all.${system}
-		  self.hydraJobs.build-all-dev-full.${system}
+                  self.hydraJobs.build-all-dev.${system}
+                  # self.hydraJobs.build-all-dev-full.${system}
                 ] ++ lib.optionals (hostPlatform.isLinux) [ ];
               meta.description = "hydraJobs: nokxpkgs contains all packages of nokx";
             });

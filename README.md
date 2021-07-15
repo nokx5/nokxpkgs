@@ -153,6 +153,11 @@ nix-build . -A hydraJobs.release.x86_64-linux --out-link dev-link
 # experimental features
 nix develop .#hydraJobs.release.x86_64-linux --profile dev-profile
 nix build .#hydraJobs.release.x86_64-linux --out-link dev-2-link
+# # full-dev
+nix-build . -A hydraJobs.build-all-dev-full.x86_64-linux --out-link dev-full-link
+# experimental features
+nix develop .#hydraJobs.build-all-dev-full.x86_64-linux --profile dev-full-profile
+nix build .#hydraJobs.build-all-dev-full.x86_64-linux --out-link dev-full-2-link
 ```
 
 
