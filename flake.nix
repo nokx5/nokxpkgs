@@ -5,19 +5,19 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     golden-cpp = {
       url = "github:nokx5/golden-cpp/main";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     golden-go = {
       url = "github:nokx5/golden-go/main";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     golden-pybind11 = {
       url = "github:nokx5/golden-pybind11/main";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     golden-python = {
       url = "github:nokx5/golden-python/main";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -60,6 +60,7 @@
       hydraJobs = {
 
         build-all = forDevSystems (system: self.packages.${system}.all-nokx);
+        build-all-dev-full = forDevSystems (system: self.packages.${system}.all-nokx-dev-full);
 
         release = forDevSystems (system:
           with nixpkgsFor.${system}; releaseTools.aggregate
@@ -68,6 +69,7 @@
               constituents =
                 [
                   self.hydraJobs.build-all.${system}
+		  self.hydraJobs.build-all-dev-full.${system}
                 ] ++ lib.optionals (hostPlatform.isLinux) [ ];
               meta.description = "hydraJobs: nokxpkgs contains all packages of nokx";
             });

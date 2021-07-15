@@ -149,13 +149,10 @@ nix-shell maintainers/scripts/update.nix --argstr package PACKAGE --argstr revis
 
 add env to cache
 ```bash
-nix-build . -A all-nokx --out-link dev-link
-nix-build . -A all-nokx-dev --out-link dev-link-full
+nix-build . -A hydraJobs.release.x86_64-linux --out-link dev-link
 # experimental features
-nix develop .#all-nokx --profile dev-profile
-nix develop .#all-nokx-dev --profile dev-profile-full
-nix build .#all-nokx --out-link dev-link
-nix build .#all-nokx-dev --out-link dev-link-full
+nix develop .#hydraJobs.release.x86_64-linux --profile dev-profile
+nix build .#hydraJobs.release.x86_64-linux --out-link dev-2-link
 ```
 
 
