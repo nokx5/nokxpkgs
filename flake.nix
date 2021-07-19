@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    rust-overlay.url = "github:oxalica/rust-overlay";
     golden-cpp = {
       url = "github:nokx5/golden-cpp/main";
       # inputs.nixpkgs.follows = "nixpkgs";
@@ -19,6 +20,10 @@
       url = "github:nokx5/golden-python/main";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    golden-rust = {
+      url = "github:nokx5/golden-rust/main";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,6 +33,8 @@
     , golden-go
     , golden-pybind11
     , golden-python
+    , golden-rust
+    , rust-overlay
     }:
     let
       forCustomSystems = custom: f: nixpkgs.lib.genAttrs custom (system: f system);
@@ -40,7 +47,7 @@
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = with self.overlays; [ classic-overlay golden-cpp-overlay golden-go-overlay golden-pybind11-overlay golden-python-overlay ];
+          overlays = with self.overlays; [ classic-overlay golden-cpp-overlay golden-go-overlay golden-pybind11-overlay golden-python-overlay rust-overlay.overlay golden-rust-overlay ];
         }
       );
 
@@ -52,6 +59,7 @@
         golden-go-overlay = golden-go.overlay;
         golden-pybind11-overlay = golden-pybind11.overlay;
         golden-python-overlay = golden-python.overlay;
+        golden-rust-overlay = golden-rust.overlay;
       };
       devShell = forDevSystems (system:
         let pkgs = nixpkgsFor.${system}; in pkgs.callPackage ./shell.nix { }
@@ -86,7 +94,7 @@
           all-nokx = pkgs.stdenvNoCC.mkDerivation {
             name = "all-nokx";
             src = self;
-            nativeBuildInputs = [ pkgs.golden-cpp pkgs.golden-cpp-clang pkgs.golden-go pkgs.golden-python-app pkgs.speedo pkgs.python3Packages.golden-pybind11 pkgs.python3Packages.golden-pybind11-clang pkgs.python3Packages.golden-python pkgs.python3Packages.speedo_client ];
+            nativeBuildInputs = [ pkgs.golden-cpp pkgs.golden-cpp-clang pkgs.golden-go pkgs.golden-python-app pkgs.golden-rust pkgs.golden-rust-nightly pkgs.speedo pkgs.python3Packages.golden-pybind11 pkgs.python3Packages.golden-pybind11-clang pkgs.python3Packages.golden-python pkgs.python3Packages.speedo_client ];
             installPhase = ''
               mkdir -p $out
               echo "nix show-derivation $out # for full derivation information" > $out/README.md
@@ -104,6 +112,7 @@
                     golden-go.devShell.${system}.inputDerivation
                     golden-python.devShell.${system}.inputDerivation
                     golden-pybind11.devShell.${system}.inputDerivation
+                    golden-rust.devShell.${system}.inputDerivation
                     self.devShell.${system}.inputDerivation
                   ];
                   installPhase = ''

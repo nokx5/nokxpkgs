@@ -106,7 +106,7 @@ Don't forget to update and clean sometimes your nix store. :wink:
 ***
 **Rust projects**
 
-- [ ] [golden-rust](https://github.com/nokx5/golden-rust)
+- [x] [golden-rust](https://github.com/nokx5/golden-rust)
 
 ***
 **Scripts & Automation**
