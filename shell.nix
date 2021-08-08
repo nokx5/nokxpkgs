@@ -6,7 +6,7 @@ assert hostPlatform.isx86_64;
 let
   vscodeExt = vscode-with-extensions.override {
     vscodeExtensions = with vscode-extensions;
-      [ bbenoist.Nix eamodio.gitlens ]
+      [ bbenoist.nix eamodio.gitlens ]
       ++ vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "emacs-mcx";
