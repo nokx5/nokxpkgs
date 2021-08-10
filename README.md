@@ -1,5 +1,7 @@
 # :koala: nokxpkgs :koala:
 
+[![CI-linux](https://github.com/nokx5/nokxpkgs/workflows/CI-linux/badge.svg)](https://github.com/nokx5/nokxpkgs/actions/workflows/ci-linux.yml) [![CI-linux](https://github.com/nokx5/nokxpkgs/workflows/CI-darwin/badge.svg)](https://github.com/nokx5/nokxpkgs/actions/workflows/ci-darwin.yml) [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nokx5/nokxpkgs/blob/master/LICENSE) <!-- [![doc](https://github.com/nokx5/nokxpkgs/workflows/doc-api/badge.svg)](https://nokx5.github.io/nokxpkgs) -->
+
 Welcome to the official **nokxpkgs** channel of [nokx](https://github.com/nokx5/)!
 
 This nokxpkgs channel contains all [*(overlayed)*](https://github.com/nokx5/nokxpkgs/blob/main/nixpkgs-nokx/default.nix) nokx softwares pinned with an official [**_stable_ nixpkgs**](https://github.com/nokx5/nokxpkgs/blob/main/default.nix#L5-L12) to help creating fully reproducible software expressions.
