@@ -16,72 +16,19 @@ Welcome to nokx cpp golden project!
 ```
 Nix is an amazing tool ! Give it a try! :ghost:
 
-## How to develop a nokx software
-
-> In order to start developing a nokx software, please refer to the
-  specific software documentation if available.
-
-All [nokx](https://github.com/nokx5/) softwares started with a nix shell script, which by default moved to `default-shell.nix`. This file is in general using the official **_stable/unstable_ nixpkgs** channel. The `default.nix` instead appears when the project joined the **nokxpkgs** channel. Thus two solutions exist to start developing :
-
-
-1. Use the `default.nix` :
-
-    Enter a shell, build a pkgs, use your local changes, simplify your workflow [after adding the **nokxpkgs** channel](#add-nokxpkgs-to-your-nix-channel)
-    ```bash
-    # you can avoid this export by adding nokxpkgs to your channels
-    export NIX_PATH=nokxpkgs=https://github.com/nokx5/nokxpkgs/archive/main.tar.gz
-    
-    # option 1: develop the local software
-    nix-shell -A dev
-    $ exit
-    
-    # option 2: build the local software
-    nix-build -A dev
-    unlink result*
-    
-    # option 3: use your local changes
-    nix-shell -I nixpkgs=$PWD -p dev
-    $ exit
-    ```
-    In general, you will find other available derivation within the `default.nix`, e.g. `-A golden-cpp` (no dev tools).
-
-
-2. Use the `default-shell.nix` :
-
-    Project development always start with a nix shell file, here named `default-shell.nix`. This file creates a shell with the nixpkgs channel (**deprecated**).
-    ```bash
-    nix-shell default-shell.nix
-    ```
-    This command could fail due to the **_unstable_** evolution of the **nixpkgs** channel. However, it could work within the pinned nokxpkgs  workflow. You can enter a *similar* environment than the one created by the `default.nix`.
-    ```bash
-    nix-shell -I nixpkgs=https://github.com/nokx5/nokxpkgs/archive/main.tar.gz default-shell.nix
-    ```
-
-
-### Add nokxpkgs to your nix channel
-
-To avoid repeating the urls, use nix channels.
-```bash
-nix-channel --list
-```
-
-You can easily add **nokxpkgs** to your list.
-```bash
-nix-channel --add https://github.com/nokx5/nokxpkgs/archive/main.tar.gz nokxpkgs
-nix-channel --update
-```
-
-You can always remove the channel
-```
-nix-channel --remove nokxpkgs
-nix-collect-garbage -d
-```
-
-Don't forget to update and clean sometimes your nix store. :wink:
 
 ## Available nokx software
 
 ***
+
+**All nokx**
+
+-   [x] all-nokx - *aggregate all nokx projects*
+-   [ ] all-nokx-dev - *aggregate all nokx dependencies for builds of nokx projects*
+-   [x] all-nokx-dev-full - *aggregate all nokx dependencies for builds of nokx projects with supercharged environments :artificial_satellite: :artificial_satellite: :artificial_satellite:
+
+***
+
 **C/C++ projects**
 
 - [x] [golden-cpp](https://github.com/nokx5/golden-cpp)
@@ -111,15 +58,66 @@ Don't forget to update and clean sometimes your nix store. :wink:
 ***
 **Scripts & Automation**
 
----
-
-**Snippets (Nix)**
-
-****
-
-- [x] all-nokx
+-   [ ] barthelemy
+-   [ ] nixOS configurations
 
 ***
+
+
+
+## How to develop a nokx software
+
+> In order to start developing a nokx software, please refer to the specific software documentation if available.
+
+#### `nix-shell` - in a nutshell
+
+All [nokx](https://github.com/nokx5/) softwares started with a `nix-shell` command using a `shell.nix` script. This file uses most probably the official **_stable/unstable_ nixpkgs** channel (see the channel section [below](#add-nokxpkgs-to-your-nix-channel)). It will create you an environment to develop with.
+
+#### `nix-build` - in a nutshell
+
+The [nokxpkgs](#) channel uses all overlays of all nokx project and give access to it from the `default.nix` script.
+
+```bash
+# build all nokx projects for Linux and MacOS
+nix-build -I nokxpkgs=https://github.com/nokx5/nokxpkgs/archive/main.tar.gz --expr '(import <nokxpkgs> {}).all-nokx' --no-out-link
+```
+
+#### `repl` - in a nutshell
+
+The repl could be helpfull to find the available softwares.
+
+```bash
+git clone https://github.com/nokx5/nokxpkgs.git
+cd nokxpkgs
+nix repl -I nixpkgs=$PWD
+> pkgs = import <nixpkgs> {}
+```
+
+Note that you do not need to clone the project to use the nix repl with nokx softwares. Fantastic! :smile:
+
+### Add nokxpkgs to your nix channel
+
+*Please keep in mind that flakes were invented to simplify considerably the update of nix channels.*
+
+To avoid repeating the urls, use nix channels.
+
+```bash
+nix-channel --list
+```
+
+You can easily add **nokxpkgs** to your list.
+```bash
+nix-channel --add https://github.com/nokx5/nokxpkgs/archive/main.tar.gz nokxpkgs
+nix-channel --update
+```
+
+You can always remove the channel
+```
+nix-channel --remove nokxpkgs
+nix-collect-garbage -d
+```
+
+Don't forget to update and clean sometimes your nix store. :wink:
 
 ## Comments
 
