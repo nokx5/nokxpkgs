@@ -27,7 +27,7 @@ Nix is an amazing tool ! Give it a try! :ghost:
 
 -   [x] all-nokx - *aggregate all nokx projects*
 -   [ ] all-nokx-dev - *aggregate all nokx dependencies for builds of nokx projects*
--   [x] all-nokx-dev-full - *aggregate all nokx dependencies for builds of nokx projects with supercharged environments :artificial_satellite: :artificial_satellite: :artificial_satellite:
+-   [x] all-nokx-dev-full - *aggregate all nokx dependencies for builds of nokx projects with supercharged environments* :artificial_satellite:
 
 ***
 
