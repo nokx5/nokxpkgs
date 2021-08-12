@@ -19,6 +19,8 @@ Welcome to nokx cpp golden project!
 Nix is an amazing tool ! Give it a try! :ghost:
 
 
+> In order to start developing a nokx software, please refer to the specific software documentation if available.
+
 ## Available nokx software
 
 ***
@@ -65,39 +67,7 @@ Nix is an amazing tool ! Give it a try! :ghost:
 
 ***
 
-
-
-## How to develop a nokx software
-
-> In order to start developing a nokx software, please refer to the specific software documentation if available.
-
-#### `nix-shell` - in a nutshell
-
-All [nokx](https://github.com/nokx5/) softwares started with a `nix-shell` command using a `shell.nix` script. This file uses most probably the official **_stable/unstable_ nixpkgs** channel (see the channel section [below](#add-nokxpkgs-to-your-nix-channel)). It will create you an environment to develop with.
-
-#### `nix-build` - in a nutshell
-
-The [nokxpkgs](#) channel uses all overlays of all nokx project and give access to it from the `default.nix` script.
-
-```bash
-# build all nokx projects for Linux and MacOS
-nix-build -I nokxpkgs=https://github.com/nokx5/nokxpkgs/archive/main.tar.gz --expr '(import <nokxpkgs> {}).all-nokx' --no-out-link
-```
-
-#### `repl` - in a nutshell
-
-The repl could be helpfull to find the available softwares.
-
-```bash
-git clone https://github.com/nokx5/nokxpkgs.git
-cd nokxpkgs
-nix repl -I nixpkgs=$PWD
-> pkgs = import <nixpkgs> {}
-```
-
-Note that you do not need to clone the project to use the nix repl with nokx softwares. Fantastic! :smile:
-
-### Add nokxpkgs to your nix channel
+## Add nokxpkgs to your nix channel
 
 *Please keep in mind that flakes were invented to simplify considerably the update of nix channels.*
 
