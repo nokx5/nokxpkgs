@@ -3,26 +3,30 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:oxalica/rust-overlay";
+    };
     golden-cpp = {
       url = "github:nokx5/golden-cpp/main";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     golden-go = {
       url = "github:nokx5/golden-go/main";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     golden-pybind11 = {
       url = "github:nokx5/golden-pybind11/main";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     golden-python = {
       url = "github:nokx5/golden-python/main";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     golden-rust = {
       url = "github:nokx5/golden-rust/main";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
   };
 
@@ -47,19 +51,61 @@
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = with self.overlays; [ classic-overlay golden-cpp-overlay golden-go-overlay golden-pybind11-overlay golden-python-overlay rust-overlay.overlay golden-rust-overlay ];
+          overlays = with self.overlays; [ all-nokx-overlay classic-overlay golden-cpp-overlay golden-go-overlay golden-pybind11-overlay golden-python-overlay rust-overlay.overlay golden-rust-overlay ];
         }
       );
+
+      depsToBuild = name: p: from: p.stdenvNoCC.mkDerivation {
+        inherit name;
+        src = self;
+        buildInputs = from;
+        nativeBuildInputs = from;
+        installPhase = ''
+          mkdir -p $out
+          echo "nix show-derivation $out # for full derivation information of $name" > $out/README.md
+        '';
+      };
+
+
 
     in
     {
       overlays = {
+        all-nokx-overlay = final: prev: {
+          all-nokx = depsToBuild "all-nokx" prev [
+            final.golden-cpp
+            final.golden-cpp-clang
+            final.golden-go
+            final.golden-python-app
+            final.golden-rust
+            final.golden-rust-nightly
+            final.speedo
+            final.python3Packages.golden-pybind11
+            final.python3Packages.golden-pybind11-clang
+            final.python3Packages.golden-python
+            final.python3Packages.speedo_client
+          ];
+          all-nokx-dev = depsToBuild "all-nokx-dev" prev [
+            final.golden-cpp.inputDerivation
+            final.golden-cpp-clang.inputDerivation
+            # final.golden-go.inputDerivation
+            final.golden-python-app.inputDerivation
+            final.golden-rust.inputDerivation
+            final.golden-rust-nightly.inputDerivation
+            final.speedo.inputDerivation
+            final.python3Packages.golden-pybind11.inputDerivation
+            final.python3Packages.golden-pybind11-clang.inputDerivation
+            final.python3Packages.golden-python.inputDerivation
+            final.python3Packages.speedo_client.inputDerivation
+          ];
+        };
         classic-overlay = final: prev: (import ./classic-overlays/nokx-overlay.nix) final prev;
         golden-cpp-overlay = golden-cpp.overlay;
         golden-go-overlay = golden-go.overlay;
         golden-pybind11-overlay = golden-pybind11.overlay;
         golden-python-overlay = golden-python.overlay;
         golden-rust-overlay = golden-rust.overlay;
+
       };
       devShell = forDevSystems (system:
         let pkgs = nixpkgsFor.${system}; in pkgs.callPackage ./shell.nix { }
@@ -68,7 +114,7 @@
       hydraJobs = {
 
         build-all = forDevSystems (system: self.packages.${system}.all-nokx);
-        build-all-dev = forDevSystems (system: self.packages.${system}.all-nokx.inputDerivation);
+        build-all-dev = forDevSystems (system: self.packages.${system}.all-nokx-dev);
         build-all-dev-full = forDevSystems (system: self.packages.${system}.all-nokx-dev-full);
 
         release = forDevSystems (system:
@@ -86,42 +132,26 @@
 
       };
 
-
       packages = forAllSystems (system:
-        let pkgs = nixpkgsFor.${system}; in
-        pkgs // # this line breaks nix check flake !! But the line is necessary to become a nix channel
+        let
+          pkgs = nixpkgsFor.${system};
+        in
         {
-          all-nokx = pkgs.stdenvNoCC.mkDerivation {
-            name = "all-nokx";
-            src = self;
-            nativeBuildInputs = [ pkgs.golden-cpp pkgs.golden-cpp-clang pkgs.golden-go pkgs.golden-python-app pkgs.golden-rust pkgs.golden-rust-nightly pkgs.speedo pkgs.python3Packages.golden-pybind11 pkgs.python3Packages.golden-pybind11-clang pkgs.python3Packages.golden-python pkgs.python3Packages.speedo_client ];
-            installPhase = ''
-              mkdir -p $out
-              echo "nix show-derivation $out # for full derivation information" > $out/README.md
-            '';
-          };
-
+          inherit (pkgs) all-nokx all-nokx-dev;
           all-nokx-dev-full =
             if (builtins.elem system devSystems) then
-              pkgs.stdenvNoCC.mkDerivation
-                {
-                  name = "all-nokx-dev";
-                  src = self;
-                  nativeBuildInputs = [
-                    golden-cpp.devShell.${system}.inputDerivation
-                    golden-go.devShell.${system}.inputDerivation
-                    golden-python.devShell.${system}.inputDerivation
-                    golden-pybind11.devShell.${system}.inputDerivation
-                    golden-rust.devShell.${system}.inputDerivation
-                    self.devShell.${system}.inputDerivation
-                  ];
-                  installPhase = ''
-                    mkdir -p $out
-                    echo "nix show-derivation $out # for full derivation information" > $out/README.md
-                  '';
-                } else pkgs.golden-cpp;
-
+              (depsToBuild "all-nokx-dev-full" pkgs
+                [
+                  golden-cpp.devShell.${system}.inputDerivation
+                  golden-go.devShell.${system}.inputDerivation
+                  golden-python.devShell.${system}.inputDerivation
+                  golden-pybind11.devShell.${system}.inputDerivation
+                  golden-rust.devShell.${system}.inputDerivation
+                  self.devShell.${system}.inputDerivation
+                ]) else pkgs.all-nokx-dev;
         });
+
+      asChannel = forAllSystems (system: nixpkgsFor.${system});
 
     };
 }

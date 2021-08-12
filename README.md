@@ -28,7 +28,7 @@ Nix is an amazing tool ! Give it a try! :ghost:
 **All nokx**
 
 -   [x] all-nokx - *aggregate all nokx projects*
--   [ ] all-nokx-dev - *aggregate all nokx dependencies for builds of nokx projects*
+-   [x] all-nokx-dev - *aggregate all nokx dependencies for builds of nokx projects*
 -   [x] all-nokx-dev-full - *aggregate all nokx dependencies for builds of nokx projects with supercharged environments* :artificial_satellite:
 
 ***
@@ -119,13 +119,13 @@ nix-shell maintainers/scripts/update.nix --argstr package PACKAGE --argstr revis
 
 add env to cache
 ```bash
-nix-build . -A all-nokx --out-link dev-link
-# experimental features
+# build project (all derivation.nix)
+nix-build . -A all-nokx --out-link dev-classic-all-nokx-link
+nix-build . -A all-nokx-dev --out-link dev-classic-all-nokx-dev-link
 nix develop .#hydraJobs.release.x86_64-linux --profile dev-profile
 nix build .#hydraJobs.release.x86_64-linux --out-link dev-2-link
-# # full-dev
-nix-build . -A all-nokx-dev-full --out-link dev-full-link
-# experimental features
+
+# build supercharged environments (all shell.nix)
 nix develop .#hydraJobs.build-all-dev-full.x86_64-linux --profile dev-full-profile
 nix build .#hydraJobs.build-all-dev-full.x86_64-linux --out-link dev-full-2-link
 ```
