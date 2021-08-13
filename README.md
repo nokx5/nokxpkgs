@@ -116,18 +116,3 @@ nixfmt $(find -name "*.nix")
 ```bash
 nix-shell maintainers/scripts/update.nix --argstr package PACKAGE --argstr revision REVISION --show-trace
 ```
-
-add env to cache
-```bash
-# build project (all derivation.nix)
-nix-build . -A all-nokx --out-link dev-classic-all-nokx-link
-nix-build . -A all-nokx-dev --out-link dev-classic-all-nokx-dev-link
-nix develop .#hydraJobs.release.x86_64-linux --profile dev-profile
-nix build .#hydraJobs.release.x86_64-linux --out-link dev-2-link
-
-# build supercharged environments (all shell.nix)
-nix develop .#hydraJobs.build-all-dev-full.x86_64-linux --profile dev-full-profile
-nix build .#hydraJobs.build-all-dev-full.x86_64-linux --out-link dev-full-2-link
-```
-
-
