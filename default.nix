@@ -9,4 +9,4 @@ let
     { src = ./.; });
 
 in
-flake.shellNix.nixpkgsFor.${system}
+flake.defaultNix.nixpkgsFor.${system}
