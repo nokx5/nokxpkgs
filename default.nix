@@ -1,4 +1,4 @@
-{}:
+{ system ? builtins.currentSystem or "unknown-system" }:
 let
   flake = (import
     (fetchTarball {
@@ -6,6 +6,7 @@ let
         "https://github.com/edolstra/flake-compat/archive/12c64ca55c1014cdc1b16ed5a804aa8576601ff2.tar.gz";
       sha256 = "sha256:0jm6nzb83wa6ai17ly9fzpqc40wg1viib8klq8lby54agpl213w5";
     })
-    { src = ./.; }).defaultNix;
+    { src = ./.; });
+
 in
-flake.outputs.asChannel.x86_64-linux
+flake.defaultNix.nixpkgsFor.${system}

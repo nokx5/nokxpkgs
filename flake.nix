@@ -115,7 +115,7 @@
 
         build-all = forDevSystems (system: self.packages.${system}.all-nokx);
         build-all-dev = forDevSystems (system: self.packages.${system}.all-nokx-dev);
-        build-all-dev-full = forDevSystems (system: self.packages.${system}.all-nokx-dev-full);
+        # build-all-dev-full = forDevSystems (system: self.packages.${system}.all-nokx-dev-full);
 
         release = forDevSystems (system:
           with nixpkgsFor.${system}; releaseTools.aggregate
@@ -149,9 +149,9 @@
                   golden-rust.devShell.${system}.inputDerivation
                   self.devShell.${system}.inputDerivation
                 ]) else pkgs.all-nokx-dev;
-        });
+        }
+      );
 
-      asChannel = forAllSystems (system: nixpkgsFor.${system});
-
+      inherit nixpkgsFor;
     };
 }
