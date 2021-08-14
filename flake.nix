@@ -105,7 +105,7 @@
         golden-pybind11-overlay = golden-pybind11.overlay;
         golden-python-overlay = golden-python.overlay;
         golden-rust-overlay = golden-rust.overlay;
-
+        rust-overlay = rust-overlay.overlay;
       };
       devShell = forDevSystems (system:
         let pkgs = nixpkgsFor.${system}; in pkgs.callPackage ./shell.nix { }
@@ -151,7 +151,5 @@
                 ]) else pkgs.all-nokx-dev;
         }
       );
-
-      inherit nixpkgsFor;
     };
 }

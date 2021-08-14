@@ -1,4 +1,4 @@
-{ system ? builtins.currentSystem or "unknown-system" }:
+{}:
 let
   flake = (import
     (fetchTarball {
@@ -7,6 +7,7 @@ let
       sha256 = "sha256:0jm6nzb83wa6ai17ly9fzpqc40wg1viib8klq8lby54agpl213w5";
     })
     { src = ./.; });
-
 in
-flake.defaultNix.nixpkgsFor.${system}
+import flake.defaultNix.inputs.nixpkgs {
+  overlays = with flake.defaultNix.overlays; [ all-nokx-overlay classic-overlay golden-cpp-overlay golden-go-overlay golden-pybind11-overlay golden-python-overlay rust-overlay golden-rust-overlay ];
+}
