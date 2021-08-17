@@ -1,13 +1,3 @@
-{}:
-let
-  flake = (import
-    (fetchTarball {
-      url =
-        "https://github.com/edolstra/flake-compat/archive/12c64ca55c1014cdc1b16ed5a804aa8576601ff2.tar.gz";
-      sha256 = "sha256:0jm6nzb83wa6ai17ly9fzpqc40wg1viib8klq8lby54agpl213w5";
-    })
-    { src = ./.; });
-in
-import flake.defaultNix.inputs.nixpkgs {
-  overlays = with flake.defaultNix.overlays; [ all-nokx-overlay classic-overlay golden-cpp-overlay golden-go-overlay golden-pybind11-overlay golden-python-overlay rust-overlay golden-rust-overlay ];
-}
+(import (fetchTarball https://github.com/edolstra/flake-compat/archive/master.tar.gz) {
+  src = ./.;
+}).defaultNix
