@@ -9,7 +9,7 @@
     };
     golden-cpp = {
       url = "github:nokx5/golden-cpp/main";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     golden-go = {
       url = "github:nokx5/golden-go/main";
